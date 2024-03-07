@@ -43,7 +43,7 @@
                             placeholder="Enter course Address"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="mobile" class="form-label">Mobile No.</label>
+                        <label for="mobile_no" class="form-label">Mobile No.</label>
                         <input type="text" class="form-control" id="mobile_no" pattern="[0-9]+" name="mobile_no"
                             placeholder="Enter your Mobile no.">
                     </div>
@@ -53,22 +53,7 @@
             </div>
         </div>
     </div>
-    <table>
-        <tr>
-            <th>Student Name</th>
-            <th>Address</th>
-            <th>Mobile no.</th>
-            <th>Course name</th>
-        </tr>
-       
-        <tr>
-            <td> </td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
 
-    </table>
 </body>
 
 </html>

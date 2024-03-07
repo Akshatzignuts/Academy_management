@@ -22,8 +22,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('academy.courses') }}">Courses</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" </li>
                 </ul>
             </div>
             <div class="nav-item">
@@ -50,7 +48,9 @@
     <div class="text-center ">
         <h3>Student Management </h3>
     </div>
+    <a href="{{route('academy.payment')}}" class="btn btn-primary">Payments</a>
     <div class="container">
+
         <div class="box">
             <div>
                 <label class="label">Label 1</label>
@@ -78,7 +78,7 @@
             <td>{{$courses->course_price}}</td>
             <td><button class="btn btn-success">View</button></td>
             <td><button class="btn btn-success">Edit</button></td>
-            <td><button class="btn btn-danger">End Course</button></td>
+            <td><a href="{{url( '/course/delete/' . $courses->id)}}" class="btn btn-danger">End Course </a></td>
             <td> <a href="{{ route('academy.student' ,['course_id' => $courses->id])}}" class="btn btn-dark">Add
                     student</a></td>
         </tr>
@@ -176,5 +176,10 @@
 
     tr:hover {
         background-color: #f5f5f5;
+    }
+
+    .btn-primary {
+        width: 10%;
+        margin-left: 2%;
     }
 </style>

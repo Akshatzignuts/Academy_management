@@ -19,13 +19,11 @@ class StudentController extends Controller
         );
         $student = Student::create($request->only('name', 'address', 'mobile_no', 'course_id')
             + ['user_id' => auth()->user()->id]);
-        return redirect()->back()->with('message', 'student added successfully');
+        return redirect()->route('studentdisplay');
     }
-    public function display()
+    public function studentdisplay()
     {
-        $user = Auth::User();
-        $id = $user->id;
-        $students = Student::where('user_id', '=', $id)->get();
-        return view('academy.student', compact('students'));
+
+        return view('academy.studentdisplay');
     }
 }
