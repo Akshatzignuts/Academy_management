@@ -23,6 +23,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('academy.courses') }}">Courses</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('students')}}" class="nav-link">All Students</a>
+                    </li>
 
                 </ul>
                 <div class="nav-item">
@@ -81,6 +84,8 @@
             </div>
         </div>
     </div>
+
+    
     @if(session('message'))
     <div class="alert alert-success">
         {{ session('message') }}

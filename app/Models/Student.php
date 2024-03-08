@@ -18,8 +18,8 @@ class Student extends Model
         'course_id',
         'user_id'
     ];
-    public function course()
+    public function courses()
     {
-        return $this->hasMany(Course::class , 'student_id' , 'id' );
+        return $this->belongsToMany(Course::class, 'student_course');
     }
 }

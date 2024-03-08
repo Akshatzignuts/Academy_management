@@ -22,6 +22,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('academy.courses') }}">Courses</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('students')}}" class="nav-link">All Students</a>
+                    </li>
                 </ul>
             </div>
             <div class="nav-item">
@@ -48,7 +51,6 @@
     <div class="text-center ">
         <h3>Student Management </h3>
     </div>
-    <a href="{{route('academy.payment')}}" class="btn btn-primary">Payments</a>
     <div class="container">
 
         <div class="box">
@@ -60,6 +62,24 @@
             </div>
             <a href="{{ route('academy.courses')}}" class="btn btn-success">Add Courses</a>
         </div>
+        <div class="box">
+            <div>
+                <label class="label">Label 1</label>
+            </div>
+            <div>
+                <label class="label">Label 2</label>
+            </div>
+            <a href="{{ route('students')}}" class="btn btn-success">All Students</a>
+        </div>
+        <div class="box">
+            <div>
+                <label class="label">Label 1</label>
+            </div>
+            <div>
+                <label class="label">Label 2</label>
+            </div>
+            <a href="{{ route('academy.student')}}" class="btn btn-dark">Add student</a>
+        </div>
     </div>
     <table>
         <tr>
@@ -69,6 +89,8 @@
             <th>Course Price</th>
             <th style="text-align: center;" colspan="4">Action</th>
         </tr>
+        @if ($course->isNotEmpty())
+        <!-- Display courses -->
         @foreach ($course as $courses)
         <tr>
             <td>{{$courses->course_name}}</td>
@@ -76,16 +98,37 @@
                 80 )) !!}</td>
             <td>{{$courses->course_time}}</td>
             <td>{{$courses->course_price}}</td>
-            <td><button class="btn btn-success">View</button></td>
-            <td><button class="btn btn-success">Edit</button></td>
+            <td><button class="btn btn-dark">Edit</button>
+            <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#courseModal">View</button></td>
             <td><a href="{{url( '/course/delete/' . $courses->id)}}" class="btn btn-danger">End Course </a></td>
-            <td> <a href="{{ route('academy.student' ,['course_id' => $courses->id])}}" class="btn btn-dark">Add
-                    student</a></td>
         </tr>
         @endforeach
+        @endif
     </table>
 
-
+    <!-- Modal -->
+    <div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="courseModalLabel">Course Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Course Details -->
+                    @if ($course->isNotEmpty())
+                    <h4>Course Name:- {{$courses->course_name}}</h4>
+                    <p>Course Description:- {{$courses->description}}</p>
+                    <p>Course Time:- {{$courses->course_time}}</p>
+                    <p>Course Price:- {{$courses->course_price}}</p>
+                    @endif
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
@@ -116,13 +159,12 @@
         color: #fff;
         text-decoration: none;
     }
-
     .container {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
         margin-top: 9ch;
-        margin-left: 70ch;
+        margin-left: 30ch;
         /* Adjust the gap between boxes */
     }
 
@@ -176,6 +218,21 @@
 
     tr:hover {
         background-color: #f5f5f5;
+    }
+
+    .modal-dialog {
+        max-width: 70%;
+        /* Adjust the maximum width of the modal dialog */
+    }
+
+    .modal-content {
+        width: 100%;
+        /* Ensure the modal content takes up the entire width */
+    }
+
+    .modal-body {
+        word-wrap: break-word;
+        /* Allow long words to break and wrap */
     }
 
     .btn-primary {

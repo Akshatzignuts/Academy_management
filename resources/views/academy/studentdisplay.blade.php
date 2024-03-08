@@ -21,6 +21,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('academy.courses') }}">Courses</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('students')}}" class="nav-link">All Students</a>
+                    </li>
 
                 </ul>
                 <div class="nav-item">
@@ -52,15 +55,44 @@
             <th>Mobile no.</th>
             <th>Course name</th>
         </tr>
-
+        @if ($student->isNotEmpty())
+        @foreach ($student as $students)
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{$students->name}}</td>
+            <td>{{$students->address}}</td>
+            <td>{{$students->mobile_no}}</td>
+            <td>N/A</td>
         </tr>
+        @endforeach
+        @else
 
+        @endif
     </table>
 </body>
 
 </html>
+<style>
+    table {
+        width: 95%;
+        border-collapse: collapse;
+        margin: 20px auto;
+        background-color: #fff;
+        box-shadow: 3px 10px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #239625;
+        color: white;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+</style>

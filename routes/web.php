@@ -30,15 +30,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/courses', [AcademyController::class, 'course'])->name('academy.courses');
-    Route::get('/student/{course_id}', [AcademyController::class, 'student'])->name('academy.student');
-    Route::post('/course/add', [AcademyController::class, 'addcourse'])->name('addcourse');
+    Route::get('/student/', [AcademyController::class, 'student'])->name('academy.student');
+    Route::post('/course/add', [AcademyController::class, 'addCourse'])->name('addcourse');
     Route::get('/dashboard', [AcademyController::class, 'display']);
     Route::get('/course/delete/{id}', [AcademyController::class, 'delete']);
-    Route::get('/payments', [AcademyController::class, 'payment'])->name('academy.payment');
-    Route::post('/payment/add', [AcademyController::class, 'addPayment'])->name('addpayment');
 
-    Route::post('/student/add', [StudentController::class, 'addstudent'])->name('addstudent');
-    Route::get('/student/display', [StudentController::class, 'studentdisplay'])->name('studentdisplay');
-    Route::get('/students/{id}', [StudentController::class, 'displaystudent']);
+    Route::get('/payments', [StudentController::class, 'payment'])->name('academy.payment');
+    Route::post('/student/add', [StudentController::class, 'addStudent'])->name('addstudent');
+    Route::get('/students/', [StudentController::class, 'studentdisplay'])->name('students');
 });
 require __DIR__ . '/auth.php';

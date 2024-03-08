@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use App\Models\Teacher;
 use App\Models\Course;
 use App\Models\Student;
 use App\Models\Payment;
@@ -14,11 +15,14 @@ class AcademyController extends Controller
     {
         return view("academy.courses");
     }
-    public function student($course_id)
+    public function student()
     {
-        return view("academy.student", compact('course_id'));
+        $user = auth()->user()->id;
+        $id = $user;
+        $course = Course::where('user_id', '=', $id)->get();
+        return view("academy.student", compact('course'));
     }
-    public function addcourse(Request $request)
+    public function addCourse(Request $request)
     {
         $request->validate(
             [
@@ -30,15 +34,15 @@ class AcademyController extends Controller
         );
         $course = Course::create($request->only('course_name', 'description', 'course_time', 'course_price')
             + ['user_id' => auth()->user()->id]);
+
         return redirect('/dashboard')->with('message', 'Course added successfully');
     }
-
-
     public function display()
     {
-        $user = Auth::User();
-        $id = $user->id;
+        $user = auth()->user()->id;
+        $id = $user;
         $course = Course::where('user_id', '=', $id)->get();
+
         return view('dashboard', compact('course'));
     }
     public function delete($id)
@@ -46,21 +50,5 @@ class AcademyController extends Controller
         $course = Course::findOrFail($id);
         $course->delete();
         return redirect()->back()->with('message', 'course deleted successfully');
-    }
-    public function payment()
-    {
-        return view("academy.payment");
-    }
-    public function addPayment(Request $request)
-    {
-        dd($request->all());
-        $request->validate(
-            [
-                'payment_mode' => 'required'
-
-            ]
-        );
-        $payment = Payment::create($request->only('payment_mode', 'student_id', 'course_id'));
-        return redirect('/dashboard')->with('message', 'Course added successfully');
     }
 }

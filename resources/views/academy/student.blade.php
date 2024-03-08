@@ -16,14 +16,34 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ url('/dashboard') }}">Home</a>
+                        <a class="nav-link" aria-current="page" href="{{ url('/dashboard') }}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('academy.courses') }}">Courses</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a href="{{ route('students')}}" class="nav-link">All Students</a>
+                    </li>
                 </ul>
-
+            </div>
+            <div class="nav-item">
+                <ul class="navbar-nav mr-auto">
+                    <li>
+                        <x-responsive-nav-link :href="route('profile.edit')">
+                            {{ __('Profile') }}
+                        </x-responsive-nav-link>
+                    </li>
+                    <li>
+                        {{-- Authentication --}}
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-responsive-nav-link>
+                        </form>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -33,6 +53,12 @@
                 <h2 class="mb-4">Student Data</h2>
                 <form action="{{route('addstudent')}}" method="post" enctype="multipart/form-data">
                     @csrf
+                    <div class="mb-3">
+                        @foreach ($course as $courses)
+                        <input type="checkbox" value="{{ $courses->id }}" id="checkbox" name="courses[]">
+                        <label for="checkbox">{{$courses->course_name}}</label>
+                        @endforeach
+                    </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Student Name</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name">
@@ -47,7 +73,17 @@
                         <input type="text" class="form-control" id="mobile_no" pattern="[0-9]+" name="mobile_no"
                             placeholder="Enter your Mobile no.">
                     </div>
-                    <input type="hidden" name="course_id" value="{{ $course_id }}">
+                    <div class="mb-3">
+                        <label for="payment_mode">Payment Mode</label>
+                        <select name="payment_mode" id="payment_mode" class="custom-select" required>
+                            <option value="" selected disabled>Select Payment Mode</option>
+                            <option value="upi">UPI</option>
+                            <option value="cheque">Cheque</option>
+                            <option value="cash">Cash</option>
+                            <option value="card">Card</option>
+                        </select>
+                        <span class="custom-select-arrow"></span>
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
