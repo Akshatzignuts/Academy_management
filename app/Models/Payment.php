@@ -14,9 +14,8 @@ class Payment extends Model
     protected $fillable = [
         'payment_mode',
         'student_id',
-        'course_id'
+        
     ];
-
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id', 'id');

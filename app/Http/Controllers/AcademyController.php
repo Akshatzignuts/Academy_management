@@ -15,13 +15,7 @@ class AcademyController extends Controller
     {
         return view("academy.courses");
     }
-    public function student()
-    {
-        $user = auth()->user()->id;
-        $id = $user;
-        $course = Course::where('user_id', '=', $id)->get();
-        return view("academy.student", compact('course'));
-    }
+
     public function addCourse(Request $request)
     {
         $request->validate(
@@ -51,4 +45,23 @@ class AcademyController extends Controller
         $course->delete();
         return redirect()->back()->with('message', 'course deleted successfully');
     }
+    public function editCourse(Request $request, $id)
+    {
+        $course = Course::findOrFail($id);
+        return view('academy.editcourse', compact('course'));
+    }
+    public function updateCourse(Request $request, $id)
+    {
+        $request->validate([
+            'course_name' => 'required',
+            'description' => 'required',
+            'course_price' => 'required',
+            'course_time' => 'required',
+        ]);
+
+        $course = Course::findOrFail($id);
+        $course->update($request->only('course_name', 'description', 'course_price', 'course_time'));
+        return redirect('/dashboard');
+    }
+   
 }

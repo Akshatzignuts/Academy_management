@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Courses</title>
+    <title>Edit Course</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -19,6 +19,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ url('/dashboard') }}">Home</a>
                     </li>
+
                     <li class="nav-item">
                         <a href="{{ route('students')}}" class="nav-link">All Students</a>
                     </li>
@@ -47,34 +48,33 @@
         </div>
     </nav>
     <div>
-
         <div class="container">
-            <a href="{{url('/dashboard')}}">
-                <i class="bi bi-arrow-left-square-fill"></i>
-            </a>
             <div class="row">
+                <a href="{{url('/dashboard')}}">
+                    <i class="bi bi-arrow-left-square-fill"></i>
+                </a>
                 <div class="col-md-6 offset-md-3">
-                    <h2 class="mb-4">Course Details</h2>
-                    <form action="{{route('addcourse')}}" method="post" enctype="multipart/form-data">
+                    <h2 class="mb-4">Edit Course</h2>
+                    <form action="{{url('course/edit/' . $course->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="course_name" class="form-label">Course Name</label>
-                            <input type="text" class="form-control" id="course_name" name="course_name" placeholder="Enter course name" required>
+                            <input type="text" class="form-control" id="course_name" name="course_name" value="{{$course->course_name}}" placeholder="Enter course name" required>
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter course description" required></textarea>
+                            <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter course description" required>{{$course->description}}</textarea>
                         </div>
                         <div class="mb-3">
                             <label for="price" class="form-label">Course Price</label>
-                            <input type="text" class="form-control" placeholder="please enter only numeic value" id="course_price" name="course_price" pattern="[0-9]+" required>
+                            <input type="text" class="form-control" placeholder="please enter only numeic value" value="{{$course->course_price}}" id="course_price" name="course_price" pattern="[0-9]+" required>
 
                         </div>
                         <div class="mb-3">
                             <label for="time" class="form-label">Course Time</label>
-                            <input type="text" class="form-control" id="time" name="course_time" placeholder="Enter course time in months" required>
+                            <input type="text" class="form-control" id="time" name="course_time" placeholder="Enter course time in months" value="{{$course->course_time}}" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Add Course</button>
+                        <button type="submit" class="btn btn-primary">Edit Course</button>
                 </div>
                 </form>
             </div>

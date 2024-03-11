@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Details Form</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Student Details Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -18,9 +18,7 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ url('/dashboard') }}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('academy.courses') }}">Courses</a>
-                    </li>
+
                     <li class="nav-item">
                         <a href="{{ route('students')}}" class="nav-link">All Students</a>
                     </li>
@@ -40,6 +38,7 @@
                             <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
+
                             </x-responsive-nav-link>
                         </form>
                     </li>
@@ -48,30 +47,36 @@
         </div>
     </nav>
     <div class="container">
+        <a href="{{url('/dashboard')}}" class="btn btn-primary">Back</a>
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <h2 class="mb-4">Student Data</h2>
+                <h2 class="mb-4">Student Detail</h2>
+                @if(count($course) === 0)
+                <h1>Please add a course f   irst.</h1>
+                @else
                 <form action="{{route('addstudent')}}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <div class="mb-3">
-                        @foreach ($course as $courses)
-                        <input type="checkbox" value="{{ $courses->id }}" id="checkbox" name="courses[]">
-                        <label for="checkbox">{{$courses->course_name}}</label>
-                        @endforeach
-                    </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Student Name</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name">
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
-                        <textarea class="form-control" id="address" name="address" rows="3"
-                            placeholder="Enter course Address"></textarea>
+                        <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter course Address"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="mobile_no" class="form-label">Mobile No.</label>
-                        <input type="text" class="form-control" id="mobile_no" pattern="[0-9]+" name="mobile_no"
-                            placeholder="Enter your Mobile no.">
+                        <input type="text" class="form-control" id="mobile_no" pattern="[0-9]+" name="mobile_no" placeholder="Enter your Mobile no.">
+                    </div>
+                    <div class="mb-3">
+                        <div>
+                            <label>Courses </label>
+                        </div>
+
+                        @foreach ($course as $courses)
+                        <input type="checkbox" value="{{$courses->id}}" id="course" name="courses[]">
+                        <label for="course">{{$courses->course_name}}</label>
+                        @endforeach
                     </div>
                     <div class="mb-3">
                         <label for="payment_mode">Payment Mode</label>
@@ -84,12 +89,25 @@
                         </select>
                         <span class="custom-select-arrow"></span>
                     </div>
+                    <div>
+                        <label>Teachers </label>
+                    </div>
+                    <div>
+                        @foreach($teachers as $teacher)
+                        <div>
+                            <input type="radio" name="teacher_id" value="{{ $teacher->id }}">
+                            {{$teacher->teacher_name}}
+                        </div>
+                        @endforeach
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+                @endif
             </div>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
@@ -123,4 +141,31 @@
     tr:hover {
         background-color: #f5f5f5;
     }
+
+    .container {
+        width: 900px;
+        height: 800px;
+        border: 2px solid gray;
+        border-radius: 12px;
+        margin-top: 8px;
+        background-image: url('https://img.freepik.com/free-photo/open-book-wooden-table_1204-363.jpg?w=826&t=st=1710153227~exp=1710153827~hmac=b3f4613386372785aa354848007dae549d448fe2b7ed47a879de8f6e6360ef9a');
+
+
+
+    }
+
+    .btn {
+        margin-top: 20px;
+    }
+
+    h2 {
+        margin-top: 30px;
+    }
+
+    .bi {
+        margin: 10px;
+        font-size: 24px;
+        color: black;
+    }
+
 </style>

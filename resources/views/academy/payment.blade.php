@@ -16,9 +16,6 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ url('/dashboard') }}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('academy.courses') }}">Courses</a>
-                    </li>
                 </ul>
                 <div class="nav-item">
                     <ul class="navbar-nav mr-auto">
@@ -107,4 +104,5 @@
         border-width: 6px 5px 0 5px;
         border-color: #666 transparent transparent transparent;
     }
+
 </style>

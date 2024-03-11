@@ -19,9 +19,7 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ url('/dashboard') }}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('academy.courses') }}">Courses</a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a href="{{ route('students')}}" class="nav-link">All Students</a>
                     </li>
@@ -49,36 +47,44 @@
         </div>
     </nav>
     <div class="text-center ">
-        <h3>Student Management </h3>
+        <h2>Student Management </h2>
     </div>
     <div class="container">
-
         <div class="box">
             <div>
-                <label class="label">Label 1</label>
+                <label class="label"></label>
             </div>
             <div>
-                <label class="label">Label 2</label>
+                <label class="label"></label>
             </div>
-            <a href="{{ route('academy.courses')}}" class="btn btn-success">Add Courses</a>
+            <a href="{{ route('academy.courses')}}" class="btn btn-dark">Add Courses</a>
         </div>
         <div class="box">
             <div>
-                <label class="label">Label 1</label>
+                <label class="label"></label>
             </div>
             <div>
-                <label class="label">Label 2</label>
+                <label class="label"></label>
             </div>
             <a href="{{ route('students')}}" class="btn btn-success">All Students</a>
         </div>
         <div class="box">
             <div>
-                <label class="label">Label 1</label>
+                <label class="label"></label>
             </div>
             <div>
-                <label class="label">Label 2</label>
+                <label class="label"></label>
             </div>
             <a href="{{ route('academy.student')}}" class="btn btn-dark">Add student</a>
+        </div>
+        <div class="box">
+            <div>
+                <label class="label"></label>
+            </div>
+            <div>
+                <label class="label"></label>
+            </div>
+            <a href="{{ route('academy.teacher')}}" class="btn btn-success">Add Teacher</a>
         </div>
     </div>
     <table>
@@ -98,7 +104,7 @@
                 80 )) !!}</td>
             <td>{{$courses->course_time}}</td>
             <td>{{$courses->course_price}}</td>
-            <td><button class="btn btn-dark">Edit</button>
+            <td><a href = "{{url('course/edit/' . $courses->id)}} " class="btn btn-dark">Edit</a>
             <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#courseModal">View</button></td>
             <td><a href="{{url( '/course/delete/' . $courses->id)}}" class="btn btn-danger">End Course </a></td>
         </tr>
@@ -161,18 +167,19 @@
     }
     .container {
         display: flex;
+        justify-content: center
         flex-wrap: wrap;
         gap: 20px;
         margin-top: 9ch;
-        margin-left: 30ch;
+        
         /* Adjust the gap between boxes */
     }
 
     /* CSS for individual boxes */
     .box {
-        width: 300px;
+        width: 310px;
         /* Set the width of each box */
-        padding: 20px;
+        padding: 15px;
         border: 1px solid #ccc;
         border-radius: 5px;
         background-color: #f9f9f9;

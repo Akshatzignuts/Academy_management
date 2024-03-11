@@ -15,11 +15,15 @@ class Student extends Model
         'name',
         'address',
         'mobile_no',
-        'course_id',
-        'user_id'
+        'user_id',
+        'teacher_id'
     ];
     public function courses()
     {
         return $this->belongsToMany(Course::class, 'student_course');
+    }
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
     }
 }
