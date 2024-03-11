@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Student Management</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
@@ -19,9 +18,12 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ url('/dashboard') }}">Home</a>
                     </li>
-                    
+
                     <li class="nav-item">
                         <a href="{{ route('students')}}" class="nav-link">All Students</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('teacherdisplay')}}" class="nav-link">Teacher details</a>
                     </li>
                 </ul>
             </div>
@@ -87,6 +89,9 @@
             <a href="{{ route('academy.teacher')}}" class="btn btn-success">Add Teacher</a>
         </div>
     </div>
+
+    </div>
+    </div>
     <table>
         <tr>
             <th>Course Name</th>
@@ -104,7 +109,7 @@
                 80 )) !!}</td>
             <td>{{$courses->course_time}}</td>
             <td>{{$courses->course_price}}</td>
-            <td><a href = "{{url('course/edit/' . $courses->id)}} " class="btn btn-dark">Edit</a>
+            <td><a href="{{url('course/edit/' . $courses->id)}} " class="btn btn-dark">Edit</a>
             <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#courseModal">View</button></td>
             <td><a href="{{url( '/course/delete/' . $courses->id)}}" class="btn btn-danger">End Course </a></td>
         </tr>
@@ -137,8 +142,7 @@
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
 </body>
 
@@ -165,13 +169,13 @@
         color: #fff;
         text-decoration: none;
     }
+
     .container {
         display: flex;
-        justify-content: center
-        flex-wrap: wrap;
+        justify-content: center flex-wrap: wrap;
         gap: 20px;
         margin-top: 9ch;
-        
+
         /* Adjust the gap between boxes */
     }
 
@@ -246,4 +250,5 @@
         width: 10%;
         margin-left: 2%;
     }
+
 </style>

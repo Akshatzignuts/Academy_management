@@ -16,6 +16,12 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ url('/dashboard') }}">Home</a>
                     </li>
+                      <li class="nav-item">
+                        <a href="{{ route('students')}}" class="nav-link">All Students</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('teacherdisplay')}}" class="nav-link">Teacher details</a>
+                    </li>
                 </ul>
                 <div class="nav-item">
                     <ul class="navbar-nav mr-auto">

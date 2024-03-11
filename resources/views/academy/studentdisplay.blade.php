@@ -21,6 +21,9 @@
                     <li class="nav-item">
                         <a href="{{ route('students')}}" class="nav-link">All Students</a>
                     </li>
+                       <li class="nav-item">
+                        <a href="{{ route('teacherdisplay')}}" class="nav-link">Teacher details</a>
+                    </li>
 
                 </ul>
                 <div class="nav-item">
