@@ -15,7 +15,6 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
@@ -95,7 +94,6 @@
             <th>Course Price</th>
             <th style="text-align: center;" colspan="4">Action</th>
         </tr>
-
         <!-- Display courses -->
         @foreach ($course as $courses)
         <tr>
@@ -119,7 +117,7 @@
         @endif
     </table>
     @if(session('message'))
-    <div id="uccess-message" class="alert alert-success">
+    <div id="success-message" class="alert alert-success">
         {{ session('message') }}
     </div>
     @endif
@@ -130,16 +128,7 @@
         }, 1000); // 5000 milliseconds = 5 seconds
 
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
-
-    </script>
-    <script>
-
-    </script>
-
-
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 
 </html>
@@ -163,7 +152,7 @@
 
     h2 {
         margin: 150px;
-        margin-left: 800px
+        margin-left: 600px
     }
 
     .sidebar a:hover {
@@ -257,7 +246,7 @@
         font-size: 24px;
         color: black;
     }
-    
+
 
     .heading {
         font-family: 'Poppins', sans-serif;

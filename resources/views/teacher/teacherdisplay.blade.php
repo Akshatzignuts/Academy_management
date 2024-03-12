@@ -50,6 +50,7 @@
         </div>
     </nav>
     <div>
+        <!--Go back to previous page-->
         <h1>Teacher Details </h1>
         <a href="{{url('/dashboard')}}" class="btn btn-primary">Back
         </a>
@@ -63,7 +64,7 @@
             <th colspan='2'>Action</th>
 
         </tr>
-
+        <!--To display the details of teacher-->
         @foreach ($teacher as $teachers)
         <tr>
             <td>{{$teachers->teacher_name}}</td>
@@ -83,7 +84,7 @@
         <h2>No Teacher added yet</h2>
         @endif
     </table>
-
+    <!--success message-->
     @if(session('message'))
     <div id="success-message" class="alert alert-success">
         {{ session('message') }}
@@ -92,8 +93,7 @@
     <script>
         setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
-        }, 2000);
-       
+        }, 1000);
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">

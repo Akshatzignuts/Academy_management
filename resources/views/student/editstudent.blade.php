@@ -13,7 +13,6 @@
  <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
@@ -50,6 +49,7 @@
             </div>
         </div>
     </nav>
+    <!--edit form to edit student details-->
     <div class="container">
         <a href="{{url('student/display/' )}}" class="btn btn-primary">Back</a>
         <div class="row">
@@ -73,7 +73,7 @@
                         <div>
                             <label>Courses </label>
                         </div>
-
+                        <!--To fetch the coourse name in form-->
                         @foreach ($course as $courses)
                         <input type="checkbox" value="{{$courses->id}}" id="course" name="courses[]">
                         <label for="course">{{$courses->course_name}}</label>
@@ -90,6 +90,7 @@
                         </select>
                         <span class="custom-select-arrow"></span>
                     </div>
+                     <!--To fetch the teacher name in form-->
                     <div>
                         <label>Teachers </label>
                     </div>
@@ -112,6 +113,7 @@
 </body>
 
 </html>
+<!-- css for styling -->
 <style>
     .btn-dark {
         margin-left: 100%;

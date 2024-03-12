@@ -51,11 +51,13 @@
         </div>
     </nav>
     <div>
+      <!--this can be used to display the student details -->
         <h1>Student Details </h1>
         <a href="{{url('/dashboard')}}" class="btn btn-primary">Back
         </a>
     </div>
     <table>
+        @if ($student->isNotEmpty())
         <tr>
             <th>Student Name</th>
             <th>Address</th>
@@ -64,8 +66,6 @@
             <th>Teacher Assign</th>
             <th colspan='2'>Action</th>
         </tr>
-
-        @if ($student->isNotEmpty())
         @foreach ($student as $students)
         <tr>
             <td>{{$students->name}}</td>
@@ -102,6 +102,7 @@
         <h2>No Student data avaialable</h2>
         @endif
     </table>
+    <!--success message for edit and delete -->
     @if(session('message'))
     <div id="success-message" class="alert alert-success">
         {{ session('message') }}
@@ -110,13 +111,10 @@
     <script>
         setTimeout(function() {
             document.getElementById('success-message').style.display = 'none';
-        }, 2000);
-
+        }, 1000);
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
-
 </html>
 <style>
     table {

@@ -51,16 +51,18 @@
         </div>
     </nav>
     <div class="container">
-
+        <!--Used to go back to previous page-->
         <a href="{{url('/dashboard')}}">
             <i class="bi bi-arrow-left-square-fill"></i>
         </a>
         <div class="row">
             <div class="col-md-6 offset-md-3">
+                <!--This can be used to create form to add student -->
                 <h2 class="mb-4">Student Detail</h2>
-
                 @if(count($course)===0 )
                 <h1>Please add a course to add student</h1>
+                @elseif(count($teachers)===0)
+                <h1>Please add a teacher to add student</h1>
                 @else
                 <form action="{{route('addstudent')}}" method="post" enctype="multipart/form-data">
                     @csrf
@@ -117,7 +119,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
 </body>
-
 </html>
 <style>
     table {
@@ -151,9 +152,6 @@
         border-radius: 12px;
         margin-top: 8px;
         background-image: url('https://img.freepik.com/free-photo/open-book-wooden-table_1204-363.jpg?w=826&t=st=1710153227~exp=1710153827~hmac=b3f4613386372785aa354848007dae549d448fe2b7ed47a879de8f6e6360ef9a');
-
-
-
     }
 
     .btn {
