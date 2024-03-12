@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Details Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
+    <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
 
@@ -20,10 +21,10 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('students')}}" class="nav-link">All Students</a>
+                        <a href="{{ route('students')}}" class="nav-link"> Students</a>
                     </li>
-                       <li class="nav-item">
-                        <a href="{{ route('teacherdisplay')}}" class="nav-link">Teacher details</a>
+                    <li class="nav-item">
+                        <a href="{{ route('teacherdisplay')}}" class="nav-link">Teachers</a>
                     </li>
                 </ul>
             </div>
@@ -50,12 +51,16 @@
         </div>
     </nav>
     <div class="container">
-        <a href="{{url('/dashboard')}}" class="btn btn-primary">Back</a>
+
+        <a href="{{url('/dashboard')}}">
+            <i class="bi bi-arrow-left-square-fill"></i>
+        </a>
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <h2 class="mb-4">Student Detail</h2>
-                @if(count($course) === 0)
-                <h1>Please add a course f   irst.</h1>
+
+                @if(count($course)===0 )
+                <h1>Please add a course to add student</h1>
                 @else
                 <form action="{{route('addstudent')}}" method="post" enctype="multipart/form-data">
                     @csrf
@@ -103,7 +108,7 @@
                         </div>
                         @endforeach
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-dark">Submit</button>
                 </form>
                 @endif
             </div>
@@ -115,12 +120,6 @@
 
 </html>
 <style>
-    .btn-dark {
-        margin-left: 100%;
-
-        /* Change the value as needed */
-    }
-
     table {
         width: 95%;
         border-collapse: collapse;

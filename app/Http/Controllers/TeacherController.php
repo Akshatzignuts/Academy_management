@@ -7,10 +7,12 @@ use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
+    //this can be used to dsplay teacher form
     public function index()
     {
         return view("academy.teacher");
     }
+    //this can be used to  add teacher details
     public function addTeacher(Request $request)
     {
 
@@ -29,6 +31,7 @@ class TeacherController extends Controller
             + ['user_id' => auth()->user()->id]);
         return redirect('/teacher/display');
     }
+    //this can be used to  display teacher details
     public function teacherDisplay()
     {
         $user = auth()->user()->id;

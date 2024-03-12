@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
 
@@ -20,10 +21,10 @@
                         <a class="nav-link active" aria-current="page" href="{{ url('/dashboard') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('students')}}" class="nav-link">All Students</a>
+                        <a href="{{ route('students')}}" class="nav-link">Students</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('teacherdisplay')}}" class="nav-link">Teacher details</a>
+                        <a href="{{ route('teacherdisplay')}}" class="nav-link">Teachers</a>
                     </li>
 
                 </ul>
@@ -77,7 +78,7 @@
                             <label for="time" class="form-label">Course Time</label>
                             <input type="text" class="form-control" id="time" name="course_time" placeholder="Enter course time in months" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Add Course</button>
+                        <button type="submit" class="btn btn-dark">Add Course</button>
                 </div>
                 </form>
             </div>
@@ -85,18 +86,22 @@
     </div>
 
 
-    @if(session('message'))
-    <div class="alert alert-success">
-        {{ session('message') }}
-    </div>
-    @endif
+    @if(Session::has('message'))
+    <script>
+        swal('message', "{{Session::get('message')}}", 'success', {
+            button: true
+            , button: "ok"
+            , timer: 2000,
 
-</body>
+        });
+        </div>
+        @endif
 
-</html>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
-</script>
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+
+    </script>
 </body>
 
 </html>

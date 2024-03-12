@@ -7,9 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Student Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
+    <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -19,10 +21,10 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('students')}}" class="nav-link">All Students</a>
+                        <a href="{{ route('students')}}" class="nav-link">Students</a>
                     </li>
-                       <li class="nav-item">
-                        <a href="{{ route('teacherdisplay')}}" class="nav-link">Teacher details</a>
+                    <li class="nav-item">
+                        <a href="{{ route('teacherdisplay')}}" class="nav-link">Teachers</a>
                     </li>
 
                 </ul>
@@ -60,7 +62,9 @@
             <th>Mobile no.</th>
             <th>Course name</th>
             <th>Teacher Assign</th>
+            <th colspan='2'>Action</th>
         </tr>
+
         @if ($student->isNotEmpty())
         @foreach ($student as $students)
         <tr>
@@ -69,6 +73,10 @@
             <td>{{$students->mobile_no}}</td>
             @php $count = 0; $totalcourse = count($students->courses); @endphp
             <td>
+
+                @if($students->courses->isEmpty())
+                <p style="color: red;">Course ended</p>
+                @else
                 @foreach ($students->courses as $course)
                 {{$course->course_name}}
                 @php $count++; @endphp
@@ -77,13 +85,18 @@
                 @elseif($count != $totalcourse)
                 ,
                 @endif
+
                 @endforeach
+                @endif
+
             </td>
             <td>{{$students->teacher->teacher_name}}</td>
+            <td><a href="{{url( '/student/delete/' . $students->id)}}"><i class="bi bi-trash"></i></a></td>
+            <td><a href="{{url( '/student/edit/' . $students->id)}}"><i class="bi bi-pencil-square"></i></a></td>
         </tr>
         @endforeach
         @else
-
+        <h2>No Student data avaialable</h2>
         @endif
     </table>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
@@ -106,6 +119,10 @@
         text-align: left;
         border-bottom: 1px solid #ddd;
 
+    }
+
+    h2 {
+        margin-left: 40%;
     }
 
     th {

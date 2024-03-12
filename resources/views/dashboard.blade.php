@@ -5,8 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Student Management</title>
+    <title>Academy Management</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Include SweetAlert2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Include Toastr.js JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 
 <body>
@@ -20,10 +26,10 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('students')}}" class="nav-link">All Students</a>
+                        <a href="{{ route('students')}}" class="nav-link">Students</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('teacherdisplay')}}" class="nav-link">Teacher details</a>
+                        <a href="{{ route('teacherdisplay')}}" class="nav-link">Teachers</a>
                     </li>
                 </ul>
             </div>
@@ -49,7 +55,7 @@
         </div>
     </nav>
     <div class="text-center ">
-        <h2>Student Management </h2>
+        <h1 class="heading">Academy Management </h1>
     </div>
     <div class="container">
         <div class="box">
@@ -59,7 +65,17 @@
             <div>
                 <label class="label"></label>
             </div>
-            <a href="{{ route('academy.courses')}}" class="btn btn-dark">Add Courses</a>
+            <a href="{{ route('academy.course')}}" class="btn btn-dark">Add Courses</a>
+        </div>
+
+        <div class="box">
+            <div>
+                <label class="label"></label>
+            </div>
+            <div>
+                <label class="label"></label>
+            </div>
+            <a href="{{ route('student')}}" class="btn btn-dark">Add student</a>
         </div>
         <div class="box">
             <div>
@@ -68,31 +84,14 @@
             <div>
                 <label class="label"></label>
             </div>
-            <a href="{{ route('students')}}" class="btn btn-success">All Students</a>
-        </div>
-        <div class="box">
-            <div>
-                <label class="label"></label>
-            </div>
-            <div>
-                <label class="label"></label>
-            </div>
-            <a href="{{ route('academy.student')}}" class="btn btn-dark">Add student</a>
-        </div>
-        <div class="box">
-            <div>
-                <label class="label"></label>
-            </div>
-            <div>
-                <label class="label"></label>
-            </div>
-            <a href="{{ route('academy.teacher')}}" class="btn btn-success">Add Teacher</a>
+            <a href="{{ route('academy.teacher')}}" class="btn btn-dark">Add Teacher</a>
         </div>
     </div>
 
     </div>
     </div>
     <table>
+        @if ($course->isNotEmpty())
         <tr>
             <th>Course Name</th>
             <th>Description</th>
@@ -100,7 +99,7 @@
             <th>Course Price</th>
             <th style="text-align: center;" colspan="4">Action</th>
         </tr>
-        @if ($course->isNotEmpty())
+
         <!-- Display courses -->
         @foreach ($course as $courses)
         <tr>
@@ -110,10 +109,12 @@
             <td>{{$courses->course_time}}</td>
             <td>{{$courses->course_price}}</td>
             <td><a href="{{url('course/edit/' . $courses->id)}} " class="btn btn-dark">Edit</a>
-            <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#courseModal">View</button></td>
-            <td><a href="{{url( '/course/delete/' . $courses->id)}}" class="btn btn-danger">End Course </a></td>
+            <td><a href="{{url('/course/view/')}} " class="btn btn-success">View</a>
+            <td><a href="{{url( '/course/delete/' . $courses->id)}}" class="btn btn-danger" onClick="confirmation(event)">End Course </a></td>
         </tr>
         @endforeach
+        @else
+        <h2>No Course Available</h2>
         @endif
     </table>
 
@@ -143,7 +144,14 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+
     </script>
+    <script>
+
+    </script>
+
+
+
 </body>
 
 </html>
@@ -165,6 +173,11 @@
         color: #fff;
     }
 
+    h2 {
+        margin: 150px;
+        margin-left: 800px
+    }
+
     .sidebar a:hover {
         color: #fff;
         text-decoration: none;
@@ -181,7 +194,7 @@
 
     /* CSS for individual boxes */
     .box {
-        width: 310px;
+        width: 400px;
         /* Set the width of each box */
         padding: 15px;
         border: 1px solid #ccc;
@@ -249,6 +262,25 @@
     .btn-primary {
         width: 10%;
         margin-left: 2%;
+    }
+
+
+    .heading {
+        font-family: 'Poppins', sans-serif;
+        font-size: 48px;
+        font-weight: 700;
+        color: #333;
+        position: relative;
+        display: inline-block;
+        padding: 20px 30px;
+
+        background-clip: text;
+        -webkit-background-clip: text;
+
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
     }
 
 </style>

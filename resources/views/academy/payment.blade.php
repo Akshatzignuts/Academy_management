@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+ <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
 
@@ -17,10 +18,10 @@
                         <a class="nav-link active" aria-current="page" href="{{ url('/dashboard') }}">Home</a>
                     </li>
                       <li class="nav-item">
-                        <a href="{{ route('students')}}" class="nav-link">All Students</a>
+                        <a href="{{ route('students')}}" class="nav-link">Students</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('teacherdisplay')}}" class="nav-link">Teacher details</a>
+                        <a href="{{ route('teacherdisplay')}}" class="nav-link">Teachers</a>
                     </li>
                 </ul>
                 <div class="nav-item">

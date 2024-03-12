@@ -30,21 +30,29 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/courses', [AcademyController::class, 'course'])->name('academy.courses');
-    Route::post('/course/add', [AcademyController::class, 'addCourse'])->name('addcourse');
+    Route::group(['prefix' => '/course'], function () {
+        Route::get('/', [AcademyController::class, 'course'])->name('academy.course');
+        Route::post('/add', [AcademyController::class, 'addCourse'])->name('addcourse');
+        Route::get('/edit/{id}', [AcademyController::class, 'editCourse']);
+        Route::post('/edit/{id}', [AcademyController::class, 'updateCourse']);
+        Route::get('/delete/{id}', [AcademyController::class, 'delete']);
+        Route::get('/view/', [AcademyController::class, 'viewCourse']);
+    });
     Route::get('/dashboard', [AcademyController::class, 'display']);
-    Route::get('course/edit/{id}', [AcademyController::class, 'editCourse']);
-    Route::post('course/edit/{id}', [AcademyController::class, 'updateCourse']);
-    Route::get('/course/delete/{id}', [AcademyController::class, 'delete']);
 
+    Route::group(['prefix' => '/student'], function () {
+        Route::get('/', [StudentController::class, 'student'])->name('student');
+        Route::post('/add', [StudentController::class, 'addStudent'])->name('addstudent');
+        Route::get('/display', [StudentController::class, 'studentdisplay'])->name('students');
+        Route::get('/delete/{id}', [StudentController::class, 'deleteStudent']);
+        Route::get('/edit/{id}', [StudentController::class, 'editStudent']);
+        Route::post('/edited/{id}', [StudentController::class, 'updateStudent']);
+    });
 
-    Route::get('/student/', [StudentController::class, 'student'])->name('academy.student');
-    Route::get('/payments', [StudentController::class, 'payment'])->name('academy.payment');
-    Route::post('/student/add', [StudentController::class, 'addStudent'])->name('addstudent');
-    Route::get('/students/', [StudentController::class, 'studentdisplay'])->name('students');
-
-    Route::get('/teacher', [TeacherController::class, 'index'])->name('academy.teacher');
-    Route::post('/teacher/add', [TeacherController::class, 'addTeacher'])->name('addteacher');
-    Route::get('/teacher/display', [TeacherController::class, 'teacherDisplay'])->name('teacherdisplay');
+    Route::group(['prefix' => '/teacher'], function () {
+        Route::get('/', [TeacherController::class, 'index'])->name('academy.teacher');
+        Route::post('/add', [TeacherController::class, 'addTeacher'])->name('addteacher');
+        Route::get('/display', [TeacherController::class, 'teacherDisplay'])->name('teacherdisplay');
+    });
 });
 require __DIR__ . '/auth.php';

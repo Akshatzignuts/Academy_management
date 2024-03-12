@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Details Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 </head>
 
 <body>
-    <!--navbar-->
+ <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
 
@@ -21,7 +21,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('students')}}" class="nav-link"> Students</a>
+                        <a href="{{ route('students')}}" class="nav-link">Students</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('teacherdisplay')}}" class="nav-link">Teachers</a>
@@ -51,29 +51,59 @@
         </div>
     </nav>
     <div class="container">
-
-        <a href="{{url('/dashboard')}}">
-            <i class="bi bi-arrow-left-square-fill"></i>
-        </a>
+        <a href="{{url('student/display/' )}}" class="btn btn-primary">Back</a>
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <h2 class="mb-4">Teacher Detail</h2>
-                <form action="{{route('addteacher')}}" method="post" enctype="multipart/form-data">
+                <h2 class="mb-4">Edit Student Detail</h2>
+                <form action="{{url('student/edited/' . $student->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label for="teacher_name" class="form-label">Teacher Name</label>
-                        <input type="text" class="form-control" id="teacher_name" name="teacher_name" placeholder="Enter your Teacher Name">
+                        <label for="name" class="form-label">Student Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{$student->name}}" placeholder="Enter your Name">
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
-                        <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter course Address"></textarea>
+                        <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter course Address">{{$student->address}}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="mobile_no" class="form-label">Mobile No.</label>
-                        <input type="text" class="form-control" id="mobile_no" pattern="[0-9]+" name="mobile_no" placeholder="Enter your Mobile no.">
+                        <input type="text" class="form-control" id="mobile_no" value="{{$student->mobile_no}}" pattern="[0-9]+" name="mobile_no" placeholder="Enter your Mobile no.">
                     </div>
-                    <button type="submit" class="btn btn-dark">Submit</button>
+                    <div class="mb-3">
+                        <div>
+                            <label>Courses </label>
+                        </div>
+
+                        @foreach ($course as $courses)
+                        <input type="checkbox" value="{{$courses->id}}" id="course" name="courses[]">
+                        <label for="course">{{$courses->course_name}}</label>
+                        @endforeach
+                    </div>
+                    <div class="mb-3">
+                        <label for="payment_mode">Payment Mode</label>
+                        <select name="payment_mode" id="payment_mode" class="custom-select" required>
+                            <option value="" selected disabled>SelectPayment Mode</option>
+                            <option value="upi">UPI</option>
+                            <option value="cheque">Cheque</option>
+                            <option value="cash">Cash</option>
+                            <option value="card">Card</option>
+                        </select>
+                        <span class="custom-select-arrow"></span>
+                    </div>
+                    <div>
+                        <label>Teachers </label>
+                    </div>
+                    <div>
+                        @foreach($teachers as $teacher)
+                        <div>
+                            <input type="radio" name="teacher_id" value="{{ $teacher->id }}">
+                            {{$teacher->teacher_name}}
+                        </div>
+                        @endforeach
+                    </div>
+                    <button type="submit" class="btn btn-primary">Edit</button>
                 </form>
+
             </div>
         </div>
     </div>
@@ -83,6 +113,12 @@
 
 </html>
 <style>
+    .btn-dark {
+        margin-left: 100%;
+
+        /* Change the value as needed */
+    }
+
     table {
         width: 95%;
         border-collapse: collapse;
