@@ -43,7 +43,7 @@ class StudentController extends Controller
 
         $payment = Payment::create($request->only('payment_mode') + ['student_id' => $student->id]);
         //dd($payment);
-        return redirect('/student/display')->with('message', 'data inserted successfully');
+        return redirect('/student/display')->with('message', 'Student added successfully');
     }
     //this can be used to display all students 
     public function studentDisplay()
@@ -68,7 +68,7 @@ class StudentController extends Controller
     //this can be used to update student details
     public function updateStudent(Request $request, $id)
     {
-        //dd($request->all());
+      
         $request->validate(
             [
                 'courses' => 'required|array',

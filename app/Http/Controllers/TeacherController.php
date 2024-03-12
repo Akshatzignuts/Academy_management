@@ -10,7 +10,7 @@ class TeacherController extends Controller
     //this can be used to dsplay teacher form
     public function index()
     {
-        return view("academy.teacher");
+        return view("teacher.teacher");
     }
     //this can be used to  add teacher details
     public function addTeacher(Request $request)
@@ -29,7 +29,7 @@ class TeacherController extends Controller
 
         $teacher = Teacher::create($request->only('teacher_name', 'address', 'mobile_no')
             + ['user_id' => auth()->user()->id]);
-        return redirect('/teacher/display');
+        return redirect('/teacher/display')->with('message', 'Teacher added Successfully');
     }
     //this can be used to  display teacher details
     public function teacherDisplay()
@@ -37,6 +37,31 @@ class TeacherController extends Controller
         $user = auth()->user()->id;
         $id = $user;
         $teacher = Teacher::where('user_id', '=', $id)->get();
-        return view('academy.teacherdisplay', compact('teacher'));
+        return view('teacher.teacherdisplay', compact('teacher'));
+    }
+    public function editTeacher(Request $request, $id)
+    {
+        $teacher = Teacher::find($id);
+        return view('teacher.editteacher', compact('teacher'));
+    }
+    public function updateTeacher(Request $request, $id)
+    {
+        $request->validate(
+            [
+                'teacher_name' => 'required',
+                'address' => 'required',
+                'mobile_no' => 'required|numeric',
+            ]
+        );
+        $teacher = Teacher::find($id);
+        $teacher->update($request->only('teacher_name', 'address', 'mobile_no')
+            + ['user_id' => auth()->user()->id]);
+        return redirect('/teacher/display')->with('message', 'Teacher edited Successfully');
+    }
+    public function deleteTeacher($id)
+    {
+        $teacher = Teacher::findOrFail($id);
+        $teacher->delete();
+        return redirect()->back()->with("message", "teacher deleted successfully");
     }
 }

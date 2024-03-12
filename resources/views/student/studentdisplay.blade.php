@@ -73,7 +73,6 @@
             <td>{{$students->mobile_no}}</td>
             @php $count = 0; $totalcourse = count($students->courses); @endphp
             <td>
-
                 @if($students->courses->isEmpty())
                 <p style="color: red;">Course ended</p>
                 @else
@@ -85,13 +84,17 @@
                 @elseif($count != $totalcourse)
                 ,
                 @endif
-
                 @endforeach
                 @endif
-
             </td>
             <td>{{$students->teacher->teacher_name}}</td>
-            <td><a href="{{url( '/student/delete/' . $students->id)}}"><i class="bi bi-trash"></i></a></td>
+            <td>
+                <form action="{{url('student/display/')}}" method="">
+                    @csrf
+                    <a href="{{url( '/student/delete/' . $students->id)}}" onclick="return confirm('Are you sure you want to delete this student?')"><i class="bi bi-trash"></i></a>
+                </form>
+            </td>
+
             <td><a href="{{url( '/student/edit/' . $students->id)}}"><i class="bi bi-pencil-square"></i></a></td>
         </tr>
         @endforeach
@@ -99,6 +102,17 @@
         <h2>No Student data avaialable</h2>
         @endif
     </table>
+    @if(session('message'))
+    <div id="success-message" class="alert alert-success">
+        {{ session('message') }}
+    </div>
+    @endif
+    <script>
+        setTimeout(function() {
+            document.getElementById('success-message').style.display = 'none';
+        }, 2000);
+
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
 </body>

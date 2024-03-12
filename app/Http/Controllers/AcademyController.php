@@ -37,7 +37,7 @@ class AcademyController extends Controller
         $course = Course::create($request->only('course_name', 'description', 'course_time', 'course_price')
             + ['user_id' => auth()->user()->id]);
 
-        return redirect('/dashboard')->with('message',);
+        return redirect('/dashboard')->with('message', 'Course added successfully');
     }
     //this can be used to add display course
     public function display()

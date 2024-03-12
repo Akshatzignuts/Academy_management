@@ -85,20 +85,6 @@
         </div>
     </div>
 
-
-    @if(Session::has('message'))
-    <script>
-        swal('message', "{{Session::get('message')}}", 'success', {
-            button: true
-            , button: "ok"
-            , timer: 2000,
-
-        });
-        </div>
-        @endif
-
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
 
     </script>

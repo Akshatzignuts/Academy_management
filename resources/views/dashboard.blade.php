@@ -6,15 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Academy Management</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Include SweetAlert2 JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- Include Toastr.js JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-</head>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+</head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -67,7 +64,6 @@
             </div>
             <a href="{{ route('academy.course')}}" class="btn btn-dark">Add Courses</a>
         </div>
-
         <div class="box">
             <div>
                 <label class="label"></label>
@@ -84,7 +80,7 @@
             <div>
                 <label class="label"></label>
             </div>
-            <a href="{{ route('academy.teacher')}}" class="btn btn-dark">Add Teacher</a>
+            <a href="{{ route('teacher')}}" class="btn btn-dark">Add Teacher</a>
         </div>
     </div>
 
@@ -108,40 +104,32 @@
                 80 )) !!}</td>
             <td>{{$courses->course_time}}</td>
             <td>{{$courses->course_price}}</td>
-            <td><a href="{{url('course/edit/' . $courses->id)}} " class="btn btn-dark">Edit</a>
-            <td><a href="{{url('/course/view/')}} " class="btn btn-success">View</a>
-            <td><a href="{{url( '/course/delete/' . $courses->id)}}" class="btn btn-danger" onClick="confirmation(event)">End Course </a></td>
+            <td><a href="{{url('course/edit/' . $courses->id)}} "><i class="bi bi-pencil-square"></i></a>
+            <td><a href="{{url('/course/view/')}} "><i class="bi bi-eye-fill"></i></a>
+            <td>
+                <form action="{{url('/dashboard' . $courses->id)}}" method="">
+                    @csrf
+                    <a href="{{url( '/course/delete/' . $courses->id)}}" onclick="return confirm('Are you sure you want to delete this course?')"><i class="bi bi-trash"></i></a>
+                </form>
+            </td>
         </tr>
         @endforeach
         @else
         <h2>No Course Available</h2>
         @endif
     </table>
-
-    <!-- Modal -->
-    <div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="courseModalLabel">Course Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Course Details -->
-                    @if ($course->isNotEmpty())
-                    <h4>Course Name:- {{$courses->course_name}}</h4>
-                    <p>Course Description:- {{$courses->description}}</p>
-                    <p>Course Time:- {{$courses->course_time}}</p>
-                    <p>Course Price:- {{$courses->course_price}}</p>
-                    @endif
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
+    @if(session('message'))
+    <div id="uccess-message" class="alert alert-success">
+        {{ session('message') }}
     </div>
+    @endif
+    <script>
+        // Hide success message after 5 seconds
+        setTimeout(function() {
+            document.getElementById('success-message').style.display = 'none';
+        }, 1000); // 5000 milliseconds = 5 seconds
 
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
 
@@ -264,6 +252,12 @@
         margin-left: 2%;
     }
 
+    .bi {
+        margin: 10px;
+        font-size: 24px;
+        color: black;
+    }
+    
 
     .heading {
         font-family: 'Poppins', sans-serif;

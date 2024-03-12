@@ -7,10 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Teacher Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
- <!--navbar-->
+    <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -54,23 +55,47 @@
         </a>
     </div>
     <table>
+        @if($teacher->isNotEmpty())
         <tr>
             <th>Teacher Name</th>
             <th>Address</th>
             <th>Mobile no.</th>
+            <th colspan='2'>Action</th>
+
         </tr>
-        @if($teacher->isNotEmpty())
+
         @foreach ($teacher as $teachers)
         <tr>
             <td>{{$teachers->teacher_name}}</td>
             <td>{{$teachers->mobile_no}}</td>
             <td>{{$teachers->address}}</td>
+            <td>
+                <form action="{{url('teacher/delete/' . $teachers->id)}}" method="">
+                    @csrf
+                    <a href="{{url( '/teacher/delete/' . $teachers->id)}}" onclick="return confirm('Are you sure you want to delete this item? And it will also delete the student assigned to this teacher')"><i class="bi bi-trash"></i></a>
+                </form>
+            </td>
+
+            <td><a href="{{url( '/teacher/edit/' . $teachers->id)}}"><i class="bi bi-pencil-square"></i></a></td>
         </tr>
         @endforeach
         @else
         <h2>No Teacher added yet</h2>
         @endif
     </table>
+
+    @if(session('message'))
+    <div id="success-message" class="alert alert-success">
+        {{ session('message') }}
+    </div>
+    @endif
+    <script>
+        setTimeout(function() {
+            document.getElementById('success-message').style.display = 'none';
+        }, 2000);
+       
+
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
 
     </script>

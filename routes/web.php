@@ -50,9 +50,12 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::group(['prefix' => '/teacher'], function () {
-        Route::get('/', [TeacherController::class, 'index'])->name('academy.teacher');
+        Route::get('/', [TeacherController::class, 'index'])->name('teacher');
         Route::post('/add', [TeacherController::class, 'addTeacher'])->name('addteacher');
         Route::get('/display', [TeacherController::class, 'teacherDisplay'])->name('teacherdisplay');
+        Route::get('/edit/{id}', [TeacherController::class, 'editTeacher']);
+        Route::post('/edited/{id}', [TeacherController::class, 'updateTeacher']);
+        Route::get('/delete/{id}', [TeacherController::class,  'deleteTeacher']);
     });
 });
 require __DIR__ . '/auth.php';
