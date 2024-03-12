@@ -1,4 +1,4 @@
-# **Blog System**
+# **Student_management**
 
 ## Overview
 
