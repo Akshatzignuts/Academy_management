@@ -14,40 +14,49 @@
     <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ url('/dashboard') }}">Home</a>
+                        <a class="nav-link" aria-current="page" href="{{ url('/dashboard') }}">Home</a>
                     </li>
+
                     <li class="nav-item">
                         <a href="{{ route('students')}}" class="nav-link">Students</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('teacherdisplay')}}" class="nav-link">Teachers</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a href="{{ route('academy.course')}}" class="nav-link">Add Course</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('student')}}" class="nav-link">Add student</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('teacher')}}" class="nav-link">Add Teacher</a>
+                    </li>
                 </ul>
-                <div class="nav-item">
-                    <ul class="navbar-nav mr-auto">
-                        <li>
-                            <x-responsive-nav-link :href="route('profile.edit')">
-                                {{ __('Profile') }}
-                            </x-responsive-nav-link>
-                        </li>
-                        <li>
-                            {{-- Authentication --}}
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                </x-responsive-nav-link>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
             </div>
+            <div class="nav-item">
+                <ul class="navbar-nav mr-auto">
+                    <li>
+                        <x-responsive-nav-link :href="route('profile.edit')">
+                            {{ __('Profile') }}
+                        </x-responsive-nav-link>
+                    </li>
+                    <li>
+                        {{-- Authentication --}}
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-responsive-nav-link>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
         </div>
     </nav>
     <div>
@@ -84,7 +93,19 @@
             </div>
         </div>
     </div>
-
+    @if($errors->any())
+    <div id="alert-danger" class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <script>
+        setTimeout(function() {
+            document.getElementById('alert-danger').style.display = 'none';
+        }, 1000);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
 
     </script>

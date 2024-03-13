@@ -23,29 +23,29 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => '/course'], function () {
         Route::get('/', [AcademyController::class, 'course'])->name('academy.course');
-        Route::post('/add', [AcademyController::class, 'addCourse'])->name('addcourse');
-        Route::get('/edit/{id}', [AcademyController::class, 'editCourse']);
-        Route::post('/edit/{id}', [AcademyController::class, 'updateCourse']);
+        Route::post('/add', [AcademyController::class, 'add'])->name('addcourse');
+        Route::get('/edit/{id}', [AcademyController::class, 'edit']);
+        Route::post('/edit/{id}', [AcademyController::class, 'update']);
         Route::get('/delete/{id}', [AcademyController::class, 'delete']);
-        Route::get('/view/', [AcademyController::class, 'viewCourse']);
+        Route::get('/view/', [AcademyController::class, 'view']);
     });
 
     Route::group(['prefix' => '/student'], function () {
         Route::get('/', [StudentController::class, 'student'])->name('student');
-        Route::post('/add', [StudentController::class, 'addStudent'])->name('addstudent');
-        Route::get('/display', [StudentController::class, 'studentdisplay'])->name('students');
-        Route::get('/delete/{id}', [StudentController::class, 'deleteStudent']);
-        Route::get('/edit/{id}', [StudentController::class, 'editStudent']);
-        Route::post('/edited/{id}', [StudentController::class, 'updateStudent']);
+        Route::post('/add', [StudentController::class, 'add'])->name('addstudent');
+        Route::get('/display', [StudentController::class, 'display'])->name('students');
+        Route::get('/delete/{id}', [StudentController::class, 'delete']);
+        Route::get('/edit/{id}', [StudentController::class, 'edit']);
+        Route::post('/edited/{id}', [StudentController::class, 'update']);
     });
 
     Route::group(['prefix' => '/teacher'], function () {
         Route::get('/', [TeacherController::class, 'index'])->name('teacher');
-        Route::post('/add', [TeacherController::class, 'addTeacher'])->name('addteacher');
-        Route::get('/display', [TeacherController::class, 'teacherDisplay'])->name('teacherdisplay');
-        Route::get('/edit/{id}', [TeacherController::class, 'editTeacher']);
-        Route::post('/edited/{id}', [TeacherController::class, 'updateTeacher']);
-        Route::get('/delete/{id}', [TeacherController::class,  'deleteTeacher']);
+        Route::post('/add', [TeacherController::class, 'add'])->name('addteacher');
+        Route::get('/display', [TeacherController::class, 'display'])->name('teacherdisplay');
+        Route::get('/edit/{id}', [TeacherController::class, 'edit']);
+        Route::post('/edited/{id}', [TeacherController::class, 'update']);
+        Route::get('/delete/{id}', [TeacherController::class,  'delete']);
     });
 });
 require __DIR__ . '/auth.php';

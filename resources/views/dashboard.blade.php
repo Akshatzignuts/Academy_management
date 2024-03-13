@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Academy Management</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
@@ -26,6 +24,15 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('teacherdisplay')}}" class="nav-link">Teachers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('academy.course')}}" class="nav-link">Add Course</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('student')}}" class="nav-link">Add student</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('teacher')}}" class="nav-link">Add Teacher</a>
                     </li>
                 </ul>
             </div>
@@ -56,50 +63,45 @@
     <div class="container">
         <div class="box">
             <div>
-                <label class="label"></label>
+                <i class="bi bi-journal"></i>
+                <h2>Total Courses {{$coursecount}}</h2>
             </div>
-            <div>
-                <label class="label"></label>
-            </div>
-            <a href="{{ route('academy.course')}}" class="btn btn-dark">Add Courses</a>
+            <h2>Courses</h2>
         </div>
         <div class="box">
             <div>
-                <label class="label"></label>
+                <i class="bi bi-person-circle icon"></i>
+                <h2>Total Students {{$studentcount}}</h2>
             </div>
-            <div>
-                <label class="label"></label>
-            </div>
-            <a href="{{ route('student')}}" class="btn btn-dark">Add student</a>
+            <h2>Students</h2>
         </div>
         <div class="box">
             <div>
-                <label class="label"></label>
+                <i class="bi bi-person-circle icon"></i>
+                <h2>Total Teachers {{$teachercount}}</h2>
             </div>
-            <div>
-                <label class="label"></label>
-            </div>
-            <a href="{{ route('teacher')}}" class="btn btn-dark">Add Teacher</a>
+            <h2>Teachers</h2>
+
         </div>
     </div>
 
     </div>
     </div>
     <table>
-        @if ($course->isNotEmpty())
+
         <tr>
             <th>Course Name</th>
-            <th>Description</th>
-            <th>Course Time</th>
-            <th>Course Price</th>
-            <th style="text-align: center;" colspan="4">Action</th>
+            <th style="text-align:center; width: 1000px;">Description</th>
+            <th style="text-align:center;">Course Time</th>
+            <th style="text-align:center;">Course Price</th>
+            <th style="text-align: center;" colspan="3">Action</th>
         </tr>
+        @if($course->isNotEmpty())
         <!-- Display courses -->
         @foreach ($course as $courses)
         <tr>
             <td>{{$courses->course_name}}</td>
-            <td> {!! strip_tags(Str::substr($courses->description, 0,
-                80 )) !!}</td>
+            <td> {!! strip_tags(Str::substr($courses->description, 0, 80 )) !!}</td>
             <td>{{$courses->course_time}}</td>
             <td>{{$courses->course_price}}</td>
             <td><a href="{{url('course/edit/' . $courses->id)}} "><i class="bi bi-pencil-square"></i></a>
@@ -110,11 +112,14 @@
                     <a href="{{url( '/course/delete/' . $courses->id)}}" onclick="return confirm('Are you sure you want to delete this course?')"><i class="bi bi-trash"></i></a>
                 </form>
             </td>
+
+            @endforeach
+            @else
+            <td class="no-course" colspan='5'>
+                <h3>No Course Available</h3>
+            <td>
+                @endif
         </tr>
-        @endforeach
-        @else
-        <h2>No Course Available</h2>
-        @endif
     </table>
     @if(session('message'))
     <div id="success-message" class="alert alert-success">
@@ -150,14 +155,19 @@
         color: #fff;
     }
 
-    h2 {
-        margin: 150px;
-        margin-left: 600px
+    h3 {
+        margin: 20px;
+
     }
 
     .sidebar a:hover {
         color: #fff;
         text-decoration: none;
+    }
+
+    .icon {
+        margin-left: 300px;
+
     }
 
     .container {
@@ -264,6 +274,10 @@
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease;
+    }
+
+    .no-course {
+        text-align: center;
     }
 
 </style>

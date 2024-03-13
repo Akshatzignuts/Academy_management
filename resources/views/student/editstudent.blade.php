@@ -10,7 +10,7 @@
 </head>
 
 <body>
- <!--navbar-->
+    <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -24,6 +24,15 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('teacherdisplay')}}" class="nav-link">Teachers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('academy.course')}}" class="nav-link">Add Course</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('student')}}" class="nav-link">Add student</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('teacher')}}" class="nav-link">Add Teacher</a>
                     </li>
                 </ul>
             </div>
@@ -79,28 +88,17 @@
                         <label for="course">{{$courses->course_name}}</label>
                         @endforeach
                     </div>
-                    <div class="mb-3">
-                        <label for="payment_mode">Payment Mode</label>
-                        <select name="payment_mode" id="payment_mode" class="custom-select" required>
-                            <option value="" selected disabled>SelectPayment Mode</option>
-                            <option value="upi">UPI</option>
-                            <option value="cheque">Cheque</option>
-                            <option value="cash">Cash</option>
-                            <option value="card">Card</option>
-                        </select>
-                        <span class="custom-select-arrow"></span>
-                    </div>
-                     <!--To fetch the teacher name in form-->
+                    <!--To fetch the teacher name in form-->
                     <div>
                         <label>Teachers </label>
                     </div>
                     <div>
-                        @foreach($teachers as $teacher)
-                        <div>
-                            <input type="radio" name="teacher_id" value="{{ $teacher->id }}">
-                            {{$teacher->teacher_name}}
-                        </div>
-                        @endforeach
+                        <select name="teacher_id">
+                            <option value="">Select message</option>
+                            @foreach($teachers as $teacher)
+                            <option value="{{ $teacher->id }}">{{$teacher->teacher_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Edit</button>
                 </form>

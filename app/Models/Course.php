@@ -17,14 +17,10 @@ class Course extends Model
         'course_price',
         'user_id'
     ];
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
-    }
+
     //this can be used for the many to many relationship
     public function students()
     {
         return $this->belongsToMany(Student::class, 'student_course');
     }
-    
 }

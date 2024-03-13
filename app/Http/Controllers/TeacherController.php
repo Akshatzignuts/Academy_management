@@ -13,7 +13,7 @@ class TeacherController extends Controller
         return view("teacher.teacher");
     }
     //this can be used to  add teacher details
-    public function addTeacher(Request $request)
+    public function add(Request $request)
     {
 
         $request->validate(
@@ -32,19 +32,19 @@ class TeacherController extends Controller
         return redirect('/teacher/display')->with('message', 'Teacher added Successfully');
     }
     //this can be used to  display teacher details
-    public function teacherDisplay()
+    public function display()
     {
         $user = auth()->user()->id;
         $id = $user;
         $teacher = Teacher::where('user_id', '=', $id)->get();
         return view('teacher.teacherdisplay', compact('teacher'));
     }
-    public function editTeacher(Request $request, $id)
+    public function edit(Request $request, $id)
     {
         $teacher = Teacher::find($id);
         return view('teacher.editteacher', compact('teacher'));
     }
-    public function updateTeacher(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $request->validate(
             [
@@ -58,7 +58,7 @@ class TeacherController extends Controller
             + ['user_id' => auth()->user()->id]);
         return redirect('/teacher/display')->with('message', 'Teacher edited Successfully');
     }
-    public function deleteTeacher($id)
+    public function delete($id)
     {
         $teacher = Teacher::findOrFail($id);
         $teacher->delete();

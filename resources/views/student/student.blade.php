@@ -7,6 +7,8 @@
     <title>Student Details Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
 </head>
 
 <body>
@@ -21,10 +23,19 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('students')}}" class="nav-link"> Students</a>
+                        <a href="{{ route('students')}}" class="nav-link">Students</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('teacherdisplay')}}" class="nav-link">Teachers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('academy.course')}}" class="nav-link">Add Course</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('student')}}" class="nav-link">Add student</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('teacher')}}" class="nav-link">Add Teacher</a>
                     </li>
                 </ul>
             </div>
@@ -82,7 +93,6 @@
                         <div>
                             <label>Courses </label>
                         </div>
-
                         @foreach ($course as $courses)
                         <input type="checkbox" value="{{$courses->id}}" id="course" name="courses[]">
                         <label for="course">{{$courses->course_name}}</label>
@@ -101,14 +111,12 @@
                     </div>
                     <div>
                         <label>Teachers </label>
-                    </div>
-                    <div>
-                        @foreach($teachers as $teacher)
-                        <div>
-                            <input type="radio" name="teacher_id" value="{{ $teacher->id }}">
-                            {{$teacher->teacher_name}}
-                        </div>
-                        @endforeach
+                        <select name="teacher_id">
+                            <option value="">Select message</option>
+                            @foreach($teachers as $teacher)
+                            <option value="{{ $teacher->id }}">{{$teacher->teacher_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-dark">Submit</button>
                 </form>
@@ -116,8 +124,23 @@
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    @if($errors->any())
+    <div id="alert-danger" class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <script>
+        setTimeout(function() {
+            document.getElementById('alert-danger').style.display = 'none';
+        }, 1000);
+
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
 </body>
 </html>
 <style>
@@ -134,11 +157,13 @@
         padding: 15px;
         text-align: left;
         border-bottom: 1px solid #ddd;
+        width: 50px;
     }
 
     th {
         background-color: #239625;
         color: white;
+        width: 100px;
     }
 
     tr:hover {

@@ -15,7 +15,7 @@ class AcademyController extends Controller
     {
         return view("academy.course");
     }
-    public function viewCourse()
+    public function view()
     {
         $user = auth()->user()->id;
         $id = $user;
@@ -24,7 +24,7 @@ class AcademyController extends Controller
     }
 
     //this can be used to add course
-    public function addCourse(Request $request)
+    public function add(Request $request)
     {
         $request->validate(
             [
@@ -39,14 +39,16 @@ class AcademyController extends Controller
 
         return redirect('/dashboard')->with('message', 'Course added successfully');
     }
-    //this can be used to add display course
+    //this can be used to display course
     public function display()
     {
         $user = auth()->user()->id;
         $id = $user;
         $course = Course::where('user_id', '=', $id)->get();
-
-        return view('dashboard', compact('course'));
+        $coursecount = Course::where('user_id', '=', $id)->get()->count();
+        $studentcount = Student::where('user_id', '=', $id)->get()->count();
+        $teachercount = Teacher::where('user_id', '=', $id)->get()->count();
+        return view('dashboard', compact('course', 'coursecount', 'studentcount', 'teachercount'));
     }
     //this can be used to delete course
     public function delete($id)
@@ -56,13 +58,13 @@ class AcademyController extends Controller
         return redirect()->back()->with('message', 'course deleted successfully');
     }
     //this can be used to edit course
-    public function editCourse(Request $request, $id)
+    public function edit(Request $request, $id)
     {
         $course = Course::findOrFail($id);
         return view('academy.editcourse', compact('course'));
     }
     //this can be used to update course
-    public function updateCourse(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'course_name' => 'required',

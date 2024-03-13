@@ -11,42 +11,51 @@
 </head>
 
 <body>
- <!--navbar-->
+    <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ url('/dashboard') }}">Home</a>
+                        <a class="nav-link" aria-current="page" href="{{ url('/dashboard') }}">Home</a>
                     </li>
 
                     <li class="nav-item">
                         <a href="{{ route('students')}}" class="nav-link">Students</a>
                     </li>
-                     <li class="nav-item">
+                    <li class="nav-item">
                         <a href="{{ route('teacherdisplay')}}" class="nav-link">Teachers</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('academy.course')}}" class="nav-link">Add Course</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('student')}}" class="nav-link">Add student</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('teacher')}}" class="nav-link">Add Teacher</a>
+                    </li>
                 </ul>
-                <div class="nav-item">
-                    <ul class="navbar-nav mr-auto">
-                        <li>
-                            <x-responsive-nav-link :href="route('profile.edit')">
-                                {{ __('Profile') }}
-                            </x-responsive-nav-link>
-                        </li>
-                        <li>
-                            {{-- Authentication --}}
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
+            </div>
+            <div class="nav-item">
+                <ul class="navbar-nav mr-auto">
+                    <li>
+                        <x-responsive-nav-link :href="route('profile.edit')">
+                            {{ __('Profile') }}
+                        </x-responsive-nav-link>
+                    </li>
+                    <li>
+                        {{-- Authentication --}}
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                     this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                </x-responsive-nav-link>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
+                                {{ __('Log Out') }}
+                            </x-responsive-nav-link>
+                        </form>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>

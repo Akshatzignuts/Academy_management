@@ -25,6 +25,15 @@
                     <li class="nav-item">
                         <a href="{{ route('teacherdisplay')}}" class="nav-link">Teachers</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('academy.course')}}" class="nav-link">Add Course</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('student')}}" class="nav-link">Add student</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('teacher')}}" class="nav-link">Add Teacher</a>
+                    </li>
                 </ul>
             </div>
             <div class="nav-item">
@@ -77,7 +86,8 @@
     </div>
 
     <!-- Bootstrap JS (optional if you need JavaScript functionality) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
+    </script>
 
 </body>
 </html>
@@ -90,7 +100,7 @@
         background-color: #fff;
         border-radius: 15px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
+        overflow-wrap: break-word;
         transition: transform 0.3s ease;
     }
 
@@ -140,8 +150,5 @@
         font-size: 24px;
         color: black;
     }
-
-
-
 
 </style>
