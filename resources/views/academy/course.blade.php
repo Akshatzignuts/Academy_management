@@ -54,7 +54,6 @@
         </div>
     </nav>
     <div>
-
         <div class="container">
             <a href="{{url('/dashboard')}}">
                 <i class="bi bi-arrow-left-square-fill"></i>
@@ -76,7 +75,6 @@
                         <div class="mb-3">
                             <label for="price" class="form-label">Course Price</label>
                             <input type="text" class="form-control" placeholder="please enter only numeic value" id="course_price" name="course_price" pattern="[0-9]+" required>
-
                         </div>
                         <div class="mb-3">
                             <label for="time" class="form-label">Course Time</label>

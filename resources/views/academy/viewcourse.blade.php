@@ -52,7 +52,6 @@
             </div>
         </div>
     </nav>
-
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -76,11 +75,9 @@
             </div>
         </div>
     </div>
-
     <!-- Bootstrap JS (optional if you need JavaScript functionality) -->
     <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
     </script>
-
 </body>
 </html>
 <style>

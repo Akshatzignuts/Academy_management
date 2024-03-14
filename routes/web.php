@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AcademyController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SendMailController;
 use App\Http\Controllers\ProfileController;
 
 use Illuminate\Support\Facades\Route;
@@ -48,5 +49,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/edited/{id}', [StudentController::class, 'update']);
         Route::get('/delete/{id}', [StudentController::class,  'delete']);
     });
+
+    Route::get('/send-mail', [SendMailController::class, 'index']);
 });
 require __DIR__ . '/auth.php';
