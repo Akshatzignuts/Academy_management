@@ -28,12 +28,6 @@
                     <li class="nav-item">
                         <a href="{{ route('academy.course')}}" class="nav-link">Add Course</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('student')}}" class="nav-link">Add student</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('teacher')}}" class="nav-link">Add Teacher</a>
-                    </li>
                 </ul>
             </div>
             <div class="nav-item">
@@ -66,19 +60,22 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <h2 class="mb-4">Edit Teacher Detail</h2>
-                <form action="{{url('teacher/edited/' . $teacher->id)}}" method="post" enctype="multipart/form-data">
+                <form action="{{url('teacher/edited/' . $contact->id)}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
+                        <input type="hidden" class="form-control" id="user_type" name="user_type" value="{{$contact->user_type}}">
+                    </div>
+                    <div class="mb-3">
                         <label for="teacher_name" class="form-label">Teacher Name</label>
-                        <input type="text" class="form-control" id="teacher_name" name="teacher_name" value="{{$teacher->teacher_name}}" placeholder="Enter your Teacher Name">
+                        <input type="text" class="form-control" id="name" name="name" value="{{$contact->name}}" placeholder="Enter your Teacher Name">
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
-                        <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter course Address">{{$teacher->address}}</textarea>
+                        <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter course Address">{{$contact->address}}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="mobile_no" class="form-label">Mobile No.</label>
-                        <input type="text" class="form-control" id="mobile_no" value="{{$teacher->mobile_no}}" pattern="[0-9]+" name="mobile_no" placeholder="Enter your Mobile no.">
+                        <input type="text" class="form-control" id="mobile_no" value="{{$contact->mobile_no}}" pattern="[0-9]+" name="mobile_no" placeholder="Enter your Mobile no.">
                     </div>
                     <button type="submit" class="btn btn-dark">Submit</button>
                 </form>

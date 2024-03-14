@@ -29,12 +29,7 @@
                     <li class="nav-item">
                         <a href="{{ route('academy.course')}}" class="nav-link">Add Course</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('student')}}" class="nav-link">Add student</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('teacher')}}" class="nav-link">Add Teacher</a>
-                    </li>
+                 
                 </ul>
             </div>
             <div class="nav-item">
@@ -63,9 +58,9 @@
         <h1>Student Details </h1>
         <a href="{{url('/dashboard')}}" class="btn btn-primary">Back
         </a>
+        <a href="{{ route('student')}}" class="btn btn-dark">Add student</a>
     </div>
     <table>
-
         <tr>
             <th>Student Name</th>
             <th>Address</th>
@@ -96,7 +91,8 @@
                 @endforeach
                 @endif
             </td>
-            <td>{{$students->teacher->teacher_name}}</td>
+
+            <td>{{$students->teacher_assigned}}</td>
             <td>
                 <form action="{{url('student/display/')}}" method="">
                     @csrf
@@ -145,8 +141,6 @@
 
     }
 
-
-
     th {
         background-color: #239625;
         color: white;
@@ -174,6 +168,10 @@
     h3 {
         margin: 20px;
 
+    }
+
+    .btn-dark {
+        margin-left: 1700px;
     }
 
 </style>

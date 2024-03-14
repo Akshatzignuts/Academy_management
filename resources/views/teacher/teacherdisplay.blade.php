@@ -29,12 +29,6 @@
                     <li class="nav-item">
                         <a href="{{ route('academy.course')}}" class="nav-link">Add Course</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('student')}}" class="nav-link">Add student</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('teacher')}}" class="nav-link">Add Teacher</a>
-                    </li>
                 </ul>
             </div>
             <div class="nav-item">
@@ -63,7 +57,9 @@
         <h1>Teacher Details </h1>
         <a href="{{url('/dashboard')}}" class="btn btn-primary">Back
         </a>
+        <a href="{{ route('teacher')}}" class="btn btn-dark">Add Teacher</a>
     </div>
+
     <table>
 
         <tr>
@@ -73,11 +69,12 @@
             <th colspan='2'>Action</th>
 
         </tr>
+
         @if($teacher->isNotEmpty())
         <!--To display the details of teacher-->
         @foreach ($teacher as $teachers)
         <tr>
-            <td>{{$teachers->teacher_name}}</td>
+            <td>{{$teachers->name}}</td>
             <td>{{$teachers->mobile_no}}</td>
             <td>{{$teachers->address}}</td>
             <td>
@@ -107,7 +104,6 @@
             document.getElementById('success-message').style.display = 'none';
         }, 1000);
 
-    
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
 
@@ -135,6 +131,7 @@
     td[colspan='2'] {
         padding: 5px;
     }
+
     th {
         background-color: #239625;
         color: white;
@@ -160,7 +157,10 @@
 
     h3 {
         margin: 20px;
+    }
 
+    .btn-dark {
+        margin-left: 1700px;
     }
 
 </style>

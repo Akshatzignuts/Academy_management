@@ -30,12 +30,6 @@
                     <li class="nav-item">
                         <a href="{{ route('academy.course')}}" class="nav-link">Add Course</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('student')}}" class="nav-link">Add student</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('teacher')}}" class="nav-link">Add Teacher</a>
-                    </li>
                 </ul>
             </div>
             <div class="nav-item">
@@ -69,6 +63,7 @@
                     <h2 class="mb-4">Edit Course</h2>
                     <form action="{{url('course/edit/' . $course->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
+
                         <div class="mb-3">
                             <label for="course_name" class="form-label">Course Name</label>
                             <input type="text" class="form-control" id="course_name" name="course_name" value="{{$course->course_name}}" placeholder="Enter course name" required>
@@ -80,7 +75,6 @@
                         <div class="mb-3">
                             <label for="price" class="form-label">Course Price</label>
                             <input type="text" class="form-control" placeholder="please enter only numeic value" value="{{$course->course_price}}" id="course_price" name="course_price" pattern="[0-9]+" required>
-
                         </div>
                         <div class="mb-3">
                             <label for="time" class="form-label">Course Time</label>
@@ -93,13 +87,21 @@
         </div>
     </div>
 
-
-    @if(session('message'))
-    <div class="alert alert-success">
-        {{ session('message') }}
+    @if($errors->any())
+    <div id="alert-danger" class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
     </div>
     @endif
+    <script>
+        setTimeout(function() {
+            document.getElementById('alert-danger').style.display = 'none';
+        }, 1000);
 
+    </script>
 </body>
 
 </html>

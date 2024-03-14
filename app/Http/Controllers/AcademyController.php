@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\Teacher;
+use App\Models\Contact; 
 use App\Models\Course;
-use App\Models\Student;
+
 use App\Models\Payment;
 use Illuminate\Http\Request;
 
@@ -46,8 +46,8 @@ class AcademyController extends Controller
         $id = $user;
         $course = Course::where('user_id', '=', $id)->get();
         $coursecount = Course::where('user_id', '=', $id)->get()->count();
-        $studentcount = Student::where('user_id', '=', $id)->get()->count();
-        $teachercount = Teacher::where('user_id', '=', $id)->get()->count();
+        $studentcount = Contact::where('user_id', '=', $id)->get()->where('user_type', '=', 'student')->count();
+        $teachercount = Contact::where('user_id', '=', $id)->get()->where('user_type', '=', 'teacher')->count();
         return view('dashboard', compact('course', 'coursecount', 'studentcount', 'teachercount'));
     }
     //this can be used to delete course
@@ -75,6 +75,6 @@ class AcademyController extends Controller
 
         $course = Course::findOrFail($id);
         $course->update($request->only('course_name', 'description', 'course_price', 'course_time'));
-        return redirect('/dashboard');
+        return redirect('/dashboard')->with('message', 'Course edited');
     }
 }

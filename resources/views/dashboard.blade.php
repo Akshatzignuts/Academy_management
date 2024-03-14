@@ -28,12 +28,6 @@
                     <li class="nav-item">
                         <a href="{{ route('academy.course')}}" class="nav-link">Add Course</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('student')}}" class="nav-link">Add student</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('teacher')}}" class="nav-link">Add Teacher</a>
-                    </li>
                 </ul>
             </div>
             <div class="nav-item">
@@ -88,7 +82,6 @@
     </div>
     </div>
     <table>
-
         <tr>
             <th>Course Name</th>
             <th style="text-align:center; width: 1000px;">Description</th>
@@ -208,7 +201,7 @@
     }
 
     table {
-        width: 95%;
+        width: 70%;
         border-collapse: collapse;
         margin: 20px auto;
         background-color: #fff;
@@ -218,7 +211,7 @@
     th,
     td {
         padding: 15px;
-        text-align: left;
+        text-align: center;
         border-bottom: 1px solid #ddd;
     }
 

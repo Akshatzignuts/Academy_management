@@ -28,12 +28,6 @@
                     <li class="nav-item">
                         <a href="{{ route('academy.course')}}" class="nav-link">Add Course</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('student')}}" class="nav-link">Add student</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('teacher')}}" class="nav-link">Add Teacher</a>
-                    </li>
                 </ul>
             </div>
             <div class="nav-item">
@@ -70,13 +64,11 @@
                         <h2 class="course-title">Course Detail</h2>
                         <div class="course-details">
                             @foreach ($courses as $course)
-
                             @endforeach
                             <p><strong>Course Name:- </strong>{{$course->course_name}}</p>
                             <p><strong>Description:- </strong>{{$course->description}}</p>
                             <p><strong>Course price:- </strong>{{$course->course_price}}</p>
                             <p><strong>Course Time:- </strong>{{$course->course_time}}</p>
-
                         </div>
 
                     </div>

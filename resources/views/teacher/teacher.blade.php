@@ -28,12 +28,6 @@
                     <li class="nav-item">
                         <a href="{{ route('academy.course')}}" class="nav-link">Add Course</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('student')}}" class="nav-link">Add student</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('teacher')}}" class="nav-link">Add Teacher</a>
-                    </li>
                 </ul>
             </div>
             <div class="nav-item">
@@ -69,8 +63,11 @@
                 <form action="{{route('addteacher')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label for="teacher_name" class="form-label">Teacher Name</label>
-                        <input type="text" class="form-control" id="teacher_name" name="teacher_name" placeholder="Enter your Teacher Name">
+                        <input type="hidden" class="form-control" id="user_type" name="user_type" value="teacher">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Teacher Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Teacher Name">
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>

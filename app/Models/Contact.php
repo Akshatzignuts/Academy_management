@@ -5,19 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Contact extends Model
 {
     use HasFactory;
 
-    protected $table = "students";
+    protected $table = "contacts";
 
     protected $fillable = [
         'name',
         'address',
         'mobile_no',
         'user_id',
-        'teacher_id'
+        'user_type',
+        'teacher_assigned'
     ];
+    
     //this can be used for the many to many relationship
     public function courses()
     {
@@ -26,9 +28,6 @@ class Student extends Model
     public function payment()
     {
         return $this->hasOne(Payment::class);
-    }
-    public function teacher()
-    {
-        return $this->belongsTo(Teacher::class);
-    }
+    }   
+    
 }

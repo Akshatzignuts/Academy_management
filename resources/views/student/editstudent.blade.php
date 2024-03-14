@@ -28,12 +28,6 @@
                     <li class="nav-item">
                         <a href="{{ route('academy.course')}}" class="nav-link">Add Course</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('student')}}" class="nav-link">Add student</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('teacher')}}" class="nav-link">Add Teacher</a>
-                    </li>
                 </ul>
             </div>
             <div class="nav-item">
@@ -64,19 +58,22 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <h2 class="mb-4">Edit Student Detail</h2>
-                <form action="{{url('student/edited/' . $student->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{url('student/edited/' . $contact->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
+                        <input type="hidden" class="form-control" id="user_type" name="user_type" value="{{$contact->user_type}}">
+                    </div>
+                    <div class="mb-3">
                         <label for="name" class="form-label">Student Name</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{$student->name}}" placeholder="Enter your Name">
+                        <input type="text" class="form-control" id="name" name="name" value="{{$contact->name}}" placeholder="Enter your Name">
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
-                        <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter course Address">{{$student->address}}</textarea>
+                        <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter course Address">{{$contact->address}}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="mobile_no" class="form-label">Mobile No.</label>
-                        <input type="text" class="form-control" id="mobile_no" value="{{$student->mobile_no}}" pattern="[0-9]+" name="mobile_no" placeholder="Enter your Mobile no.">
+                        <input type="text" class="form-control" id="mobile_no" value="{{$contact->mobile_no}}" pattern="[0-9]+" name="mobile_no" placeholder="Enter your Mobile no.">
                     </div>
                     <div class="mb-3">
                         <div>
@@ -84,7 +81,7 @@
                         </div>
                         <!--To fetch the coourse name in form-->
                         @foreach ($course as $courses)
-                        <input type="checkbox" value="{{$courses->id}}" id="course" name="courses[]">
+                        <input type="checkbox" value="{{$courses->id}}" id="course" name="courses[]" {{ $contact->courses->contains($courses->id) ? 'checked' : '' }}>
                         <label for="course">{{$courses->course_name}}</label>
                         @endforeach
                     </div>
@@ -96,7 +93,7 @@
                         <select name="teacher_id">
                             <option value="">Select message</option>
                             @foreach($teachers as $teacher)
-                            <option value="{{ $teacher->id }}">{{$teacher->teacher_name }}</option>
+                            <option value="{{ $teacher->id }}">{{$teacher->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -106,6 +103,21 @@
             </div>
         </div>
     </div>
+    @if($errors->any())
+    <div id="alert-danger" class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <script>
+        setTimeout(function() {
+            document.getElementById('alert-danger').style.display = 'none';
+        }, 1000);
+
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
 </body>

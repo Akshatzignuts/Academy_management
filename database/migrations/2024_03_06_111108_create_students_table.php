@@ -16,10 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('mobile_no');
+            $table->string('user_type');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('teacher_id');
-            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
             $table->string('created_by')->nullable();

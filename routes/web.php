@@ -3,7 +3,7 @@
 use App\Http\Controllers\AcademyController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TeacherController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -33,19 +33,20 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => '/student'], function () {
         Route::get('/', [StudentController::class, 'student'])->name('student');
         Route::post('/add', [StudentController::class, 'add'])->name('addstudent');
-        Route::get('/display', [StudentController::class, 'display'])->name('students');
+        Route::get('/display', [StudentController::class, 'displayStudent'])->name('students');
         Route::get('/delete/{id}', [StudentController::class, 'delete']);
         Route::get('/edit/{id}', [StudentController::class, 'edit']);
         Route::post('/edited/{id}', [StudentController::class, 'update']);
     });
 
+
     Route::group(['prefix' => '/teacher'], function () {
-        Route::get('/', [TeacherController::class, 'index'])->name('teacher');
-        Route::post('/add', [TeacherController::class, 'add'])->name('addteacher');
-        Route::get('/display', [TeacherController::class, 'display'])->name('teacherdisplay');
-        Route::get('/edit/{id}', [TeacherController::class, 'edit']);
-        Route::post('/edited/{id}', [TeacherController::class, 'update']);
-        Route::get('/delete/{id}', [TeacherController::class,  'delete']);
+        Route::get('/', [StudentController::class, 'index'])->name('teacher');
+        Route::post('/add', [StudentController::class, 'add'])->name('addteacher');
+        Route::get('/display', [StudentController::class, 'displayTeacher'])->name('teacherdisplay');
+        Route::get('/edit/{id}', [studentController::class, 'edit']);
+        Route::post('/edited/{id}', [StudentController::class, 'update']);
+        Route::get('/delete/{id}', [StudentController::class,  'delete']);
     });
 });
 require __DIR__ . '/auth.php';

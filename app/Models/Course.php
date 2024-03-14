@@ -21,6 +21,6 @@ class Course extends Model
     //this can be used for the many to many relationship
     public function students()
     {
-        return $this->belongsToMany(Student::class, 'student_course');
+        return $this->belongsToMany(Contact::class, 'student_course');
     }
 }

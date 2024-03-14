@@ -9,7 +9,7 @@ class Payment extends Model
 {
     use HasFactory;
 
-    protected $table = "payment";
+    protected $table = "payments";
 
     protected $fillable = [
         'payment_mode',
@@ -18,6 +18,6 @@ class Payment extends Model
     ];
     public function student()
     {
-        return $this->belongsTo(Student::class, 'student_id', 'id');
+        return $this->belongsTo(Contact::class, 'student_id', 'id');
     }
 }
