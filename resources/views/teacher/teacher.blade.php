@@ -60,28 +60,30 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <h2 class="mb-4">Teacher Detail</h2>
+                <!--form for teacher details-->
                 <form action="{{route('addteacher')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <input type="hidden" class="form-control" id="user_type" name="user_type" value="teacher">
+                        <input type="hidden" class="form-control" id="user_type" name="user_type" value="teacher" required>
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Teacher Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Teacher Name">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Teacher Name" required>
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
-                        <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter course Address"></textarea>
+                        <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter course Address" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="mobile_no" class="form-label">Mobile No.</label>
-                        <input type="text" class="form-control" id="mobile_no" pattern="[0-9]+" name="mobile_no" placeholder="Enter your Mobile no.">
+                        <input type="text" class="form-control" id="mobile_no" pattern="[0-9]+" name="mobile_no" placeholder="Enter your Mobile no." required>
                     </div>
                     <button type="submit" class="btn btn-dark">Submit</button>
                 </form>
             </div>
         </div>
     </div>
+                    <!--this can be used display error-->
     @if($errors->any())
     <div id="alert-danger" class="alert alert-danger">
         <ul>

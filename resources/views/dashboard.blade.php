@@ -11,6 +11,7 @@
 
 </head>
 <body>
+    <!--this can be used for a navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -114,6 +115,7 @@
                 @endif
         </tr>
     </table>
+    <!--this can be used for error message-->
     @if(session('message'))
     <div id="success-message" class="alert alert-success">
         {{ session('message') }}

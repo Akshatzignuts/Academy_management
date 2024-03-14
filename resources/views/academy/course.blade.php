@@ -62,6 +62,7 @@
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <h2 class="mb-4">Course Details</h2>
+                    <!--this can be used to submit form-->
                     <form action="{{route('addcourse')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
@@ -87,6 +88,7 @@
             </div>
         </div>
     </div>
+     <!--this can be used to display error-->
     @if($errors->any())
     <div id="alert-danger" class="alert alert-danger">
         <ul>

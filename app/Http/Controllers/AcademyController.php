@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\Contact; 
+use App\Models\Contact;
 use App\Models\Course;
 
 use App\Models\Payment;
@@ -11,10 +11,12 @@ use Illuminate\Http\Request;
 
 class AcademyController extends Controller
 {
+    //this can be used to display course form
     public function course()
     {
         return view("academy.course");
     }
+    //this can be used to display single course detail
     public function view()
     {
         $user = auth()->user()->id;

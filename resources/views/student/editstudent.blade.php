@@ -61,19 +61,19 @@
                 <form action="{{url('student/edited/' . $contact->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <input type="hidden" class="form-control" id="user_type" name="user_type" value="{{$contact->user_type}}">
+                        <input type="hidden" class="form-control" id="user_type" name="user_type" value="{{$contact->user_type}}" required>
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Student Name</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{$contact->name}}" placeholder="Enter your Name">
+                        <input type="text" class="form-control" id="name" name="name" value="{{$contact->name}}" placeholder="Enter your Name" required>
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
-                        <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter course Address">{{$contact->address}}</textarea>
+                        <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter course Address" required>{{$contact->address}}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="mobile_no" class="form-label">Mobile No.</label>
-                        <input type="text" class="form-control" id="mobile_no" value="{{$contact->mobile_no}}" pattern="[0-9]+" name="mobile_no" placeholder="Enter your Mobile no.">
+                        <input type="text" class="form-control" id="mobile_no" value="{{$contact->mobile_no}}" pattern="[0-9]+" name="mobile_no" placeholder="Enter your Mobile no." required>
                     </div>
                     <div class="mb-3">
                         <div>
@@ -90,7 +90,7 @@
                         <label>Teachers </label>
                     </div>
                     <div>
-                        <select name="teacher_id">
+                        <select name="teacher_id" required>
                             <option value="">Select message</option>
                             @foreach($teachers as $teacher)
                             <option value="{{ $teacher->id }}">{{$teacher->name }}</option>

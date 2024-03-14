@@ -61,6 +61,7 @@
                 </a>
                 <div class="col-md-6 offset-md-3">
                     <h2 class="mb-4">Edit Course</h2>
+                    <!--can be used form for edit student details-->
                     <form action="{{url('course/edit/' . $course->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
 
@@ -86,7 +87,7 @@
             </div>
         </div>
     </div>
-
+    <!--can be used form for display error message-->
     @if($errors->any())
     <div id="alert-danger" class="alert alert-danger">
         <ul>
