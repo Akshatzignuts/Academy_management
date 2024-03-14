@@ -99,9 +99,8 @@
                     <a href="{{url( '/student/delete/' . $students->id)}}" onclick="return confirm('Are you sure you want to delete this student?')"><i class="bi bi-trash"></i></a>
                 </form>
             </td>
-            
             <td><a href="{{url( '/student/edit/' . $students->id)}}"><i class="bi bi-pencil-square"></i></a></td>
-            @endif
+
         </tr>
         @endforeach
         @else
